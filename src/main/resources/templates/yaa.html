@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>HM / Employee Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link th:href="@{/style.css}" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card w3-shadow">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">SERVIS</a>
+    <a href="#hall" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CAWANGAN</a>
+    <a href="#booking" class="w3-bar-item w3-button w3-padding-large w3-hide-small">TENTANG KAMI</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+  	<a class="w3-bar-item w3-padding-large w3-center w3-display-topmiddle w3-text-grey">HOME MANAGER</a>
+  	<div th:if="${session.isEmpty()}">
+	  	<a th:href="@{/register/choose}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Daftar</a>
+	  	<a th:href="@{/login}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Masuk</a>	
+  	</div>
+  	<div th:if="!${session.isEmpty()}">
+  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Buat Temujanji</a>
+  		<a th:text="'Hello, '+ ${session.name}" th:href="@{/account/{id} (id=${session.id})}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"></a>
+  	</div>
+  </div>
+</div>
+
+<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#hall" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">HALL</a>
+  <a href="#booking" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">BOOKING</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MORE</a>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px; margin-top:50px">
+  <div class="form-container">
+    <div id="page-1" class="form-page active">
+      <p class="font-weight-bold text-primary mb-2">MAKLUMAT PERIBADI PEMOHON</p>
+      <div class="form-group">
+        <label for="name">Nama</label>
+        <input type="text" name="name" class="form-control" placeholder="Nama Penuh" th:field="*{name}">
+      </div>
+      <div class="form-group">
+        <label for="ic">No. Kad Pengenalan</label>
+        <input type="text" name="ic" class="form-control" placeholder="No. Kad Pengenalan" th:field="*{ic}">
+      </div>
+      <div class="form-group">
+        <label for="age">Umur</label>
+        <input type="text" name="age" class="form-control" placeholder="Umur" th:field="*{age}">
+      </div>
+      <div class="form-group">
+        <label for="address">Alamat</label>
+        <input type="text" name="address" class="form-control" placeholder="Alamat" th:field="*{address}">
+      </div>
+      <div class="form-group">
+        <label for="phonenum">No. Tel</label>
+        <input type="text" name="phonenum" class="form-control" placeholder="No. tel" th:field="*{phonenum}">
+      </div>
+      <div class="form-group">
+        <label for="phonenum2">No. Tel (Waris yang boleh dihubungi)</label>
+        <input type="text" name="phonenum2" class="form-control" placeholder="No. tel waris" th:field="*{phonenum2}">
+      </div>
+      <div class="form-group">
+        <label for="race">Bangsa</label>
+        <input type="text" name="race" class="form-control" placeholder="Bangsa" th:field="*{race}">
+      </div>
+    </div>
+    <div id="page-2" class="form-page">
+      <div class="form-group">
+        <label class="col-form-label">Jantina</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="female" name="gender" value="Perempuan" th:field="*{gender}">
+          <label class="form-check-label" for="female">Perempuan</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="male" name="gender" value="Lelaki" th:field="*{gender}">
+          <label class="form-check-label" for="male">Lelaki</label>
+        </div>
+        </div>
+    </div>
+    <div id="page-3" class="form-page">
+        <!-- Page 3 content here -->
+    </div>
+</div>
+
+<div class="form-navigation">
+    <button type="button" class="previous-page">Previous</button>
+    <button type="button" class="next-page">Next</button>
+    <button type="submit" class="submit-form" style="display: none;">Submit</button>
+</div>
+</div>
+
+
+<!-- End Page Content -->
+
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p class="w3-medium">Dibangunkan oleh <a href="#" target="_blank">Yayasan Pembangunan Keluarga Terrengganu</a></p>
+</footer>
+
+<script>
+// Automatic Slideshow - change image every 4 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 4000);    
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+var modal = document.getElementById('ticketModal');
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>

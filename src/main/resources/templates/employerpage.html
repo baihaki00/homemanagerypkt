@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>HM / Employee Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link th:href="@{/style.css}" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card w3-shadow">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">SERVIS</a>
+    <a href="#hall" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CAWANGAN</a>
+    <a href="#booking" class="w3-bar-item w3-button w3-padding-large w3-hide-small">TENTANG KAMI</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+  	<a class="w3-bar-item w3-padding-large w3-center w3-display-topmiddle w3-text-grey">HOME MANAGER</a>
+  	<div th:if="${session.isEmpty()}">
+	  	<a th:href="@{/register/choose}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Daftar</a>
+	  	<a th:href="@{/login}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Masuk</a>	
+  	</div>
+  	<div th:if="!${session.isEmpty()}">
+  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Buat Temujanji</a>
+  		<a th:text="'Hello, '+ ${session.name}" th:href="@{/account/{id} (id=${session.id})}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"></a>
+  	</div>
+  </div>
+</div>
+
+<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#hall" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">HALL</a>
+  <a href="#booking" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">BOOKING</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MORE</a>
+</div>
+
+<!-- Page content -->
+
+
+<div class="w3-content" style="max-width:2000px;">
+<div>
+
+  <div class="box-tab-employer">	
+	    <div class="container">
+	  <div class="row">
+	    <div class="col-sm-4">
+	      <div class="card" style="width: 350px; height: 550px;">
+	        <div class="card-body">
+    		<h2 class="header-pemohon">Akaun Pemohon</h2>
+			<img src="profilepic.png" class="center-image">
+		      <ul>
+		        <li>Nama : Baihaki </li>
+		        <li>No. IC : 000916030761 </li>
+		        <li>Alamat : W1/447-A JALAN MERANTI PASIR MAS KEL</li>
+		        <li>No. Telefon : 01156430215</li>
+		        <li>Email : bai@com</li>
+		        <li>Pekerjaan : Pelajar</li>
+		        <li>Jawatan : CEO</li>
+		        <li>Pendapatan : RM4000</li>
+		      </ul>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="col-sm-8">
+	      <div class="card" style="width: 100%; height: 290px; margin-bottom: 10px;">
+	        <div class="card-body">
+		      <h2 class="header-pemohon">Butiran Permohonan</h2>
+		      <br>
+		      <p>Anda belum lagi membuat sebarang permohonan. 
+		      Sila klik butang dibawah untuk butiran lanjut 
+		      tentang pakej dan mengisi borang perkhidmatan kami.</p>
+		      <a th:href="@{/booking/new}" class="btn btn-secondary btn-lg">ISI BORANG PERMOHONAN KHIDMAT</a>
+	        </div>
+	      </div>
+	      <div class="card" style="width: 100%; height: 250px; margin-top: 10px;">
+	        <div class="card-body">
+	          <h2 class="header-pemohon">Status Ketersediaan</h2>
+	          <br>
+        		<p>TIADA PEKERJA YANG DITUGASKAN UNTUK MAJIKAN BUAT MASA SEKARANG</p>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+  </div>
+</div>
+</div>
+
+
+<!-- End Page Content -->
+
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge" style="margin-top: 0px">
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p class="w3-medium">Dibangunkan oleh <a href="#" target="_blank">Yayasan Pembangunan Keluarga Terrengganu</a></p>
+</footer>
+
+<script>
+// Automatic Slideshow - change image every 4 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 4000);    
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+var modal = document.getElementById('ticketModal');
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>

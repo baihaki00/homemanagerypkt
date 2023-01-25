@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>HM / Employee Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link th:href="@{/style.css}" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card w3-shadow">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">SERVIS</a>
+    <a href="#hall" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CAWANGAN</a>
+    <a href="#booking" class="w3-bar-item w3-button w3-padding-large w3-hide-small">TENTANG KAMI</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+  	<a class="w3-bar-item w3-padding-large w3-center w3-display-topmiddle w3-text-grey">HOME MANAGER</a>
+  	<div th:if="${session.isEmpty()}">
+	  	<a th:href="@{/register/choose}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Daftar</a>
+	  	<a th:href="@{/login}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Masuk</a>	
+  	</div>
+  	<div th:if="!${session.isEmpty()}">
+  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Buat Temujanji</a>
+  		<a th:text="'Hello, '+ ${session.name}" th:href="@{/account/{id} (id=${session.id})}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"></a>
+  	</div>
+  </div>
+</div>
+
+<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#hall" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">HALL</a>
+  <a href="#booking" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">BOOKING</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MORE</a>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px; margin-top:46px">
+
+	  <div class="box-form-booking">
+	  	
+	    <div class="box-form-content-booking">
+	    	
+			<div class="container">
+			<form name="employeefrm" class="container" th:action="@{/savebooking}" th:object="${booking}" method="POST">
+			  <div class="row">
+			    <div class="col-md-12">
+			      <div class="form-group">
+			        <!-- Pakej Perkhidmatan -->
+				        <div class="text-center">
+				    		<h3 style="margin-bottom:30px" class="header-pemohon-booking">Borang Permohonan Perkhidmatan Home Manager</h3>
+				  		</div>
+				  		<div class="text-center">
+				    		<p class="font-weight-bold text-primary mb-2">PAKEJ PERKHIDMATAN</p>
+				  		</div>
+			        
+						  <div class="row mt-4">
+						    <div class="col-md-4">
+						      <div class="card">
+						        <div class="card-header">Pakej Harian</div>
+						        <div class="card-body">
+						          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+						          <input type="radio" name="pakej" value="Pakej Harian" th:field="*{packages}" checked> Pilih Pakej Harian
+						        </div>
+						      </div>
+						    </div>
+						    <div class="col-md-4">
+						      <div class="card">
+						        <div class="card-header">Pakej Bulanan</div>
+						        <div class="card-body">
+						          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+						          <input type="radio" name="pakej" value="Pakej Bulanan" th:field="*{packages}"> Pilih Pakej Bulanan
+						        </div>
+						      </div>
+						    </div>
+						    <div class="col-md-4">
+						      <div class="card">
+						        <div class="card-header">Pakej 1 Tahun (Kontrak)</div>
+						        <div class="card-body">
+						          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+						          <input type="radio" name="pakej" value="Pakej 1 Tahun (Kontrak)" th:field="*{packages}"> Pilih Pakej 1 Tahun (Kontrak)
+						        </div>
+						      </div>	
+						    </div>
+						  </div>
+			      </div> <!-- form group -->
+			    </div>
+			  </div>
+			  <div class="row mt-4">
+			    <div class="col-md-6">
+			      <div class="form-group py-3 px-4">
+		      		<div class="text-center">
+			    		<p class="font-weight-bold text-primary mb-2">MAKLUMAT ISI RUMAH</p>
+			  		</div>
+			        <!-- copy and paste input and label for Maklumat Isirumah here -->
+			        <div class="form-group row">
+					        <label for="ipt-lepasansekolah" class="col-sm-7 col-form-label mt-2">IPT @ Lepasan Sekolah :</label>
+					        <div class="col-sm-5 mt-2">
+					            <select class="form-control" name="ipt-lepasansekolah" id="ipt-lepasansekolah" th:field="*{household}">
+					            	<option value="" disabled selected>Pilih bilangan</option>
+					                <option value="1">0</option>
+					                <option value="1">1</option>
+					                <option value="2">2</option>
+					                <option value="3">3</option>
+					                <option value="4">4</option>
+					                <option value="5">5</option>
+					                <option value="6">6</option>
+					                <option value="7">7</option>
+					                <option value="8">8</option>
+					                <option value="9">9</option>
+					                <option value="10">10</option>
+					            </select>
+					        </div>
+					    </div>
+					<div class="form-group row">
+				            <label for="spm" class="col-sm-7 col-form-label mt-2">SPM :</label>
+				            <div class="col-sm-5 mt-2">
+				                <select class="form-control" name="spm" id="spm" th:field="*{household}">
+				                	<option value="" disabled selected>Pilih bilangan</option>
+				                    <option value="1">0</option>
+				                    <option value="1">1</option>
+				                    <option value="2">2</option>
+				                    <option value="3">3</option>
+				                    <option value="4">4</option>
+				                    <option value="5">5</option>
+				                    <option value="6">6</option>
+				                    <option value="7">7</option>
+				                    <option value="8">8</option>
+				                    <option value="9">9</option>
+				                    <option value="10">10</option>
+				                </select>
+				            </div>
+				        </div>
+				        <div class="form-group row">
+				            <label for="pmr-pt3" class="col-sm-7 col-form-label mt-2">PMR @ PT3 :</label>
+				            <div class="col-sm-5 mt-2">
+				                <select class="form-control" name="pmr-pt3" th:field="*{household}">
+				                	<option value="" disabled selected>Pilih bilangan</option>
+				                    <option value="1">0</option>
+				                    <option value="1">1</option>
+				                    <option value="2">2</option>
+				                    <option value="3">3</option>
+				                    <option value="4">4</option>
+				                    <option value="5">5</option>
+				                    <option value="6">6</option>
+				                    <option value="7">7</option>
+				                    <option value="8">8</option>
+				                    <option value="9">9</option>
+				                    <option value="10">10</option>
+				                </select>
+				            </div>
+				        </div>
+				        <div class="form-group row">
+				            <label for="pmr-pt3" class="col-sm-7 col-form-label mt-2">UPSR @ Tadika :</label>
+				            <div class="col-sm-5 mt-2">
+				                <select class="form-control" name="upsr" th:field="*{household}">
+				                	<option value="" disabled selected>Pilih bilangan</option>
+				                    <option value="1">0</option>
+				                    <option value="1">1</option>
+				                    <option value="2">2</option>
+				                    <option value="3">3</option>
+				                    <option value="4">4</option>
+				                    <option value="5">5</option>
+				                    <option value="6">6</option>
+				                    <option value="7">7</option>
+				                    <option value="8">8</option>
+				                    <option value="9">9</option>
+				                    <option value="10">10</option>
+				                </select>
+				            </div>
+				        </div>
+				        <div class="form-group row">
+				            <label for="pmr-pt3" class="col-sm-7 col-form-label mt-2">4 Tahun Kebawah :</label>
+				            <div class="col-sm-5 mt-2">
+				                <select class="form-control" name="4tahunkebawah" th:field="*{household}">
+				                	<option value="" disabled selected>Pilih bilangan</option>
+				                    <option value="1">0</option>
+				                    <option value="1">1</option>
+				                    <option value="2">2</option>
+				                    <option value="3">3</option>
+				                    <option value="4">4</option>
+				                    <option value="5">5</option>
+				                    <option value="6">6</option>
+				                    <option value="7">7</option>
+				                    <option value="8">8</option>
+				                    <option value="9">9</option>
+				                    <option value="10">10</option>
+				                </select>
+				            </div>
+				        </div>
+				        <div class="form-group row">
+				            <label for="pmr-pt3" class="col-sm-7 col-form-label mt-2">Lain-lain Isi Rumah :</label>
+				            <div class="col-sm-5 mt-2">
+				                <select class="form-control" name="lainlain" th:field="*{household}">
+				                	<option value="" disabled selected>Pilih bilangan</option>
+				                    <option value="1">0</option>
+				                    <option value="1">1</option>
+				                    <option value="2">2</option>
+				                    <option value="3">3</option>
+				                    <option value="4">4</option>
+				                    <option value="5">5</option>
+				                    <option value="6">6</option>
+				                    <option value="7">7</option>
+				                    <option value="8">8</option>
+				                    <option value="9">9</option>
+				                    <option value="10">10</option>
+				                </select>
+				            </div>
+				        </div>
+			      </div> <!-- formgroup -->
+			    </div>
+			    <div class="col-md-6 ">
+			      <div class="form-group py-3 px-4">
+			      <div class="text-center">
+			    		<p class="font-weight-bold text-primary mb-2">TUJUAN PERMOHONAN</p>
+			  		</div>
+			        <!-- Tujuan Permohonan -->
+        			<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="kemasrumah" name="jobscope" value="Mengemas Kediaman">
+						<label class="form-check-label" for="kemasrumah">Mengemas Kediaman</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="jagaanak" name="jobscope" value="Penjagaan Kanak-kanak">
+						<label class="form-check-label" for="jagaanak">Penjagaan Kanak-kanak</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="jagaorangtua" name="jobscope" value="Penjagaan Warga Emas">
+						<label class="form-check-label" for="jagaorangtua">Penjagaan Warga Emas</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="jagaoku" name="jobscope" value="Penjagaan Warga OKU">
+					<label class="form-check-label" for="jagaoku">Penjagaan Warga OKU</label>
+					</div>
+					<br>
+					<div class="form-group">
+						<label for="race">Lain-lain (Sila nyatakan)</label>
+						<div class="form-outline">
+						  <textarea class="form-control" id="textarealainlain" rows="4"></textarea>
+						  <label class="form-label" for="textAreaExample">Sila nyatakan tujuan permohonan</label>
+						</div>
+					</div>
+			      </div>
+			    </div>
+			  </div>
+				  	<div class="form-group text-center">
+					<button type="submit" class="btn btn-primary">HANTAR BORANG</button>
+					</div>
+				</form>
+			</div>
+    	</div>
+	</div>
+</div>
+
+
+
+<!-- End Page Content -->
+
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p class="w3-medium">Dibangunkan oleh <a href="#" target="_blank">Yayasan Pembangunan Keluarga Terrengganu</a></p>
+</footer>
+
+<script>
+// Automatic Slideshow - change image every 4 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 4000);    
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+var modal = document.getElementById('ticketModal');
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>

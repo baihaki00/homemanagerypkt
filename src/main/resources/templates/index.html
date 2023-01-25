@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Home Manager</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+body
+{
+
+  font-family: 'Poppins',sans-serif;
+}
+.mySlides 
+{
+  display: none
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card w3-shadow">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">SERVIS</a>
+    <a href="#hall" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CAWANGAN</a>
+    <a href="#booking" class="w3-bar-item w3-button w3-padding-large w3-hide-small">TENTANG KAMI</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+  	<a class="w3-bar-item w3-padding-large w3-center w3-display-topmiddle w3-text-grey">HOME MANAGER</a>
+  	<div th:if="${session.isEmpty()}">
+	  	<a th:href="@{/register/choose}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Daftar</a>
+	  	<a th:href="@{/login}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Masuk</a>	
+  	</div>
+  	<div th:if="!${session.isEmpty()}">
+  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Keluar</a>
+  		<a th:text="'Hello, '+ ${session.name}" th:href="@{/account/{id} (id=${session.id})}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"></a>
+  	</div>
+  </div>
+</div>
+
+<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#hall" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">HALL</a>
+  <a href="#booking" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">BOOKING</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MORE</a>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+  <!-- Automatic Slideshow Images -->
+  <div class="mySlides w3-display-container w3-center">
+    <img src="banner.png" style="width:100%">
+    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small"> 
+    </div>
+  </div>
+  </div>
+
+  <!-- The Hall Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="hall">
+    <h2 class="w3-wide">HOME MANAGER</h2>
+    <p class="w3-opacity"><i>Keluarga Bahagia Anda Sejahtera</i></p>
+    <p class="w3-justify">Home Manager menawarkan pelbagai perkhidmatan kepada majikan. Daftarkan diri anda sebagai
+      majikan. Klik butang dibawah untuk butiran lebih lanjut.</p>
+  </div>
+
+  <!-- The Services Section -->
+	  <div th:if="${session.isEmpty()}">
+		  	<div class="w3-yellow" id="booking">
+		    	<div class="w3-container w3-content w3-padding-32" style="max-width:800px">
+		      		<h2 class="w3-wide w3-center"><a th:href="@{/service}">PERKHIDMATAN YANG DITAWARKAN</a></h2>
+				</div>
+
+      <div class="row" style="padding: 1cm; text-align: center;">
+      <div class="column">
+          <img src="house.png">
+          <h3>PENGURUS KEDIAMAN</h3>
+      </div>
+      <div class="column">
+        <img src="baby.png">
+          <h3>PENJAGAAN KANAK-KANAK</h3>
+      </div>
+      <div class="column">
+        <img src="wargaemas.png" >
+          <h3>PENJAGAAN WARGA EMAS</h3>
+      </div>
+      <div class="column">
+        <img src="house.png">
+          <h3>PENJAGAAN WARGA OKU</h3>
+      </div>
+      </div>
+      </div>
+    </div>
+
+      <!-- The Hall Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="hall">
+    <p class="w3-align">Home Manager menawarkan pelbagai perkhidmatan kepada majikan. Daftarkan diri anda sebagai
+      majikan. Klik butang dibawah untuk butiran lebih lanjut.
+       </p>
+       <button class="w3-button w3-black w3-section w3-center w3-align" type="submit" href="register.html">DAFTAR SEKARANG</button>
+  </div>
+
+
+
+  <!-- The Contact Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
+    <h2 class="w3-wide w3-center">CONTACT</h2>
+    <p class="w3-opacity w3-center"><i>Got feedback and question? Drop us an email!</i></p>
+    <div class="w3-row w3-padding-32">
+      <div class="w3-col m6 w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker" style="width:20px"></i>
+        Jalan Sultan Omar,
+        20300 Kuala Terengganu,
+        Terengganu Darul Iman.<br>
+        <i class="fa fa-phone" style="width:20px"></i> Telefon: 09-624 9355 / 57 / 58<br>
+        <i class="fa fa-envelope" style="width:20px"> </i> Email: admin@ypkt.gov.my<br>
+      </div>
+      <div class="w3-col m6">
+        <form action="/action_page.php" target="_blank">
+          <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+            <div class="w3-half">
+              <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+            </div>
+            <div class="w3-half">
+              <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+            </div>
+          </div>
+          <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+          <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<!-- End Page Content -->
+
+
+<!-- Image of location/map -->
+<img src="map.png" class="w3-image w3-greyscale-min" style="width:100%">
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p class="w3-medium">Powered by <a href="#" target="_blank">Yayasan Pembangunan Keluarga Terrengganu</a></p>
+</footer>
+
+<script>
+// Automatic Slideshow - change image every 4 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 4000);    
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+var modal = document.getElementById('ticketModal');
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
