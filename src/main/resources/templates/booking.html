@@ -30,8 +30,8 @@
 	  	<a th:href="@{/login}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Masuk</a>	
   	</div>
   	<div th:if="!${session.isEmpty()}">
-  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Buat Temujanji</a>
-  		<a th:text="'Hello, '+ ${session.name}" th:href="@{/account/{id} (id=${session.id})}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"></a>
+  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Keluar</a>
+  		<a th:text="'Hello, '+ ${session.name}" th:href="@{/employer/{id} (id=${session.id})}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"></a>
   	</div>
   </div>
 </div>

@@ -50,7 +50,7 @@
 <div>
   <div class="box-form-employee">	
     <div class="box-form-content-employee">
-		<form name="employeefrm" class="container" th:action="@{/registeremployee}" th:object="${register}" method="POST">
+		<form name="employeefrm" class="container" th:action="@{/saveJobApplication}" th:object="${jobApplication}" method="POST">
 			<div class="text-center">
 	    		<h3 style="margin-bottom:30px" class="header-pemohon-booking">Borang Permohonan Jawatan Pengurus Kediaman</h3>
 	  		</div>
@@ -62,6 +62,7 @@
 				<label for="name">Nama</label>
 				<input type="text" name="name" class="form-control" placeholder="Nama Penuh" th:field="*{name}">
 			</div>
+			
 			<div class="form-group">
 				<label for="ic">No. Kad Pengenalan</label>
 				<input type="text" name="ic" class="form-control" placeholder="No. Kad Pengenalan" th:field="*{ic}">
@@ -96,6 +97,10 @@
 			</div>
 			<div class="col-md-6 float-right">
 		  	<div class="form-group">
+		  	<div class="form-group">
+				<label for="ic">Email</label>
+				<input type="text" name="email" class="form-control" placeholder="Email" th:field="*{email}">
+			</div>
 			<label class="col-form-label">Jantina</label>
 			<select class="form-control" id="gender" name="gender" th:field="*{gender}" th:selected="selected">
 				<option value="" selected>- Pilih jantina -</option>

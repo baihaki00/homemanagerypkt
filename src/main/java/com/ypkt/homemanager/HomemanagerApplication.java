@@ -1,6 +1,6 @@
 package com.ypkt.homemanager;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,8 +12,7 @@ public class HomemanagerApplication implements CommandLineRunner {
 		SpringApplication.run(HomemanagerApplication.class, args);
 	}
 	
-	@Autowired
-	private EmployerRepository employerRepository;
+
 	
 	@Override
 	public void run(String... args) throws Exception {}

@@ -56,10 +56,10 @@
 	    <div class="col-sm-4">
 	      <div class="card" style="width: 350px; height: 550px;">
 	        <div class="card-body">
-    		<h2 class="header-pemohon">Akaun Pemohon</h2>
+    		<h2 class="header-pemohon">Pekerja</h2>
 			<img src="profilepic.png" class="center-image">
 		      <ul>
-		        <li>Nama : <span th:text="${employer.name}"></span></li>
+		        <li>Nama : <p th:text="*{employee.name}"></p></li>
 		        <li>No. IC : 000916030761 </li>
 		        <li>Alamat : W1/447-A JALAN MERANTI PASIR MAS KEL</li>
 		        <li>No. Telefon : 01156430215</li>
@@ -77,23 +77,23 @@
 		      <h2 class="header-pemohon">Butiran Permohonan</h2>
 		      <br>
 		      <div>
-	      		<div th:if="${bookingStatus == null}">
-		      		<p>Anda belum lagi membuat sebarang permohonan. 
-			      Sila klik butang dibawah untuk butiran lanjut 
-			      tentang pakej dan mengisi borang perkhidmatan kami.</p>
-			      <a th:href="@{/booking/new}" class="btn btn-secondary btn-lg">ISI BORANG PERMOHONAN KHIDMAT</a>
-	      		</div>
-	      		<div th:if="${bookingStatus == 'NEW BOOKING'}">
-		      		<p>Permohonan telah dibuat. Sila tunggu pengesahan dari pihak kami.</p>
-	      		</div>
-	      		<div th:if="${bookingStatus == 'PENDING'}">
-		      		<p>Seorang pekerja telah ditugaskan untuk anda.</p>
-		      		<button>Terima</button>
-		      		<button>Tolak</button>
-	      		</div>
+	      		<div>
+		   			<div th:if="${checkJobOffer != null}">
+						Anda telah ditawarkan pekerjaan. Butiran seperti berikut.
+	   					<p>Job Offer ID: <span th:text="${jobOffer.jobOffer_id}"></span></p>
+						  <form method="post" th:action="@{/employee/jobApproval/{jobOffer_id} (jobOffer_id=${jobOffer.jobOffer_id})}">
+						    <a><input type="submit" value="Terima" /></a>
+						</form>
+					</div>
+					<div th:if="${checkJobOffer == null}">
+						YA
+					</div>
+					
 		      </div>
 	        </div>
+	      	</div>
 	      </div>
+	      
 	      <div class="card" style="width: 100%; height: 250px; margin-top: 10px;">
 	        <div class="card-body">
 	          <h2 class="header-pemohon">Status Ketersediaan</h2>

@@ -1,37 +1,50 @@
 package com.ypkt.homemanager;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+
+//this class create jobApplication obj, before an employer
+//can be listed as official worker, the jobapplication made by employer must first be approved.
+
 @Entity
-@Table (name = "employees")
-public class Employee {
+@Table (name="jobApplication")
+public class JobApplication {
 	
-	public Employee() {} //instantiate
+	public JobApplication() {} //instantiate
 	
-	@OneToOne(mappedBy = "employee")
-	private JobApplication jobApplication;
 	
-	@OneToMany(mappedBy = "employee")
-	private List<JobOffer> jobOffers;
-	
+	//important details for this class
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long jobApplication_id;
+	
+	
+	@OneToOne
+	@JoinColumn(name="employee_id")
+	private Employee employee; //foreign key
+	
+	
+	//private String jobScope_id;
+	//private String request_date;
+	
+	@Column(name="jobApplicaationStatus", nullable = false)
+	private String jobApplicationStatus = "NEW JOB APPLICATION";
+	
+	
+	//employee details, will be stored here first, if the job application is approved all the data will be sent to employee obj.
+	@Column(name="name")
+	private String name;
 	
 	@Column(name="email")
 	private String email;
-	
-	@Column(name="name")
-	private String name;
 	
 	@Column(name="ic")
 	private String ic;
@@ -72,16 +85,12 @@ public class Employee {
 	@Column(name="evaluation")
 	private String evaluation;
 	
-	
-	@Column(name="availibility", nullable = false) //availibility ada tiga state, available, unavailable, in progress
-	private String availability = "UNAVAILABLE";
-	
-	
 	//constructor
-	public Employee(String name, String ic, String age, String address, String phonenum, String phonenum2,
-			String gender, String race, String marriage, String academic, String disease, String vehicle,
-			String jobscope, String evaluation, String availability, String email, JobApplication jobApplication) {
+	public JobApplication(String employee_id, String jobApplicationStatus, String name, String ic, String age,
+			String address, String phonenum, String phonenum2, String gender, String race, String marriage,
+			String academic, String disease, String vehicle, String jobscope, String evaluation, Employee employee, String email) {
 		super();
+		this.jobApplicationStatus = jobApplicationStatus;
 		this.name = name;
 		this.ic = ic;
 		this.age = age;
@@ -96,44 +105,43 @@ public class Employee {
 		this.vehicle = vehicle;
 		this.jobscope = jobscope;
 		this.evaluation = evaluation;
-		this.availability = availability;
+		this.employee = employee;
 		this.email = email;
-		this.jobApplication = jobApplication;
 	}
 	
-	
-
-	public JobApplication getJobApplication() {
-		return jobApplication;
-	}
-
-
-
-	public void setJobApplication(JobApplication jobApplication) {
-		this.jobApplication = jobApplication;
-	}
-
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
-
-	//setters getters
-	public Long getId() {
-		return id;
+	//setter getter
+	public Long getJobApplication_id() {
+		return jobApplication_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	
+
+	public void setJobApplication_id(Long jobApplication_id) {
+		this.jobApplication_id = jobApplication_id;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public String getJobApplicationStatus() {
+		return jobApplicationStatus;
+	}
+
+	public void setJobApplicationStatus(String jobApplicationStatus) {
+		this.jobApplicationStatus = jobApplicationStatus;
 	}
 
 	public String getName() {
@@ -248,14 +256,6 @@ public class Employee {
 		this.evaluation = evaluation;
 	}
 
-	public String getAvailability() {
-		return availability;
-	}
-
-	public void setAvailability(String availability) {
-		this.availability = availability;
-	}
-	
 	
 	
 	

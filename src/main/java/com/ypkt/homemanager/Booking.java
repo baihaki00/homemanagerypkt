@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,9 +19,14 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long booking_id;
 	
+	//employer_id indicating which employer make the booking
+	@ManyToOne
+	@JoinColumn(name="employer_id")
+	private Employer employer;
+	
 	@Column(name="packages")
 	private String packages;
-	
+
 	@Column(name="household")
 	private String household;
 	
@@ -29,8 +36,8 @@ public class Booking {
 	@Column(name="employeeAssigned")
 	private String employeeAssigned;
 	
-	@Column(name="bookingStatus", nullable = false)
-	private String bookingStatus = "NEW BOOKING";
+	@Column(name="bookingStatus")
+	private String bookingStatus;
 	
 	
 	//constructor
@@ -41,13 +48,23 @@ public class Booking {
 		return booking_id;
 	}
 
-	public Booking(String packages, String household, String jobscope, String employeeAssigned, String bookingStatus) {
+	public Booking(String packages, String household, String jobscope, String employeeAssigned, String bookingStatus, Employer employer) {
 		super();
 		this.packages = packages;
 		this.household = household;
 		this.jobscope = jobscope;
 		this.employeeAssigned = employeeAssigned;
 		this.bookingStatus = bookingStatus;
+		this.employer = employer;
+	}
+	
+
+	public Employer getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(Employer employer) {
+		this.employer = employer;
 	}
 	
 	

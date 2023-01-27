@@ -19,6 +19,12 @@ public class HomeManagerServiceImpl implements HomeManagerService{
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
+	@Autowired
+	private JobApplicationRepository jobApplicationRepository;
+	
+	@Autowired
+	private JobOfferRepository jobOfferRepository;
+	
 	
 	public HomeManagerServiceImpl(EmployerRepository employerRepository) {
 		
@@ -29,6 +35,16 @@ public class HomeManagerServiceImpl implements HomeManagerService{
 	@Override
 	public Employer saveRegister(Employer employer) {
 		return employerRepository.save(employer);
+	}
+	
+	@Override
+	public JobOffer saveJobOffer(JobOffer jobOffer) {
+		return jobOfferRepository.save(jobOffer);
+	}
+	
+	@Override
+	public JobApplication saveJobApplication(JobApplication jobApplication) {
+		return jobApplicationRepository.save(jobApplication);
 	}
 	
 	@Override
@@ -61,6 +77,26 @@ public class HomeManagerServiceImpl implements HomeManagerService{
 		return employeeRepository.findById(id).get();
 	}
 	
+	@Override
+	public Employer getEmployerById(Long id) {
+		return employerRepository.findById(id).get();
+	}
+	
+	@Override
+	public JobApplication getJobApplicationById(Long id) {
+		return jobApplicationRepository.findById(id).get();
+	}
+	
+	@Override
+	public JobOffer getJobOfferById(Long id) {
+		return jobOfferRepository.findById(id).get();
+	}
+	
+	@Override
+	public JobOffer getJobOfferByEmployerId(Long id) {
+		return jobOfferRepository.findByEmployeeId(id);
+	}
+
 	@Override //list employers
 	public List<Employer> getAllEmployers() {
 		return employerRepository.findAll();
@@ -77,6 +113,11 @@ public class HomeManagerServiceImpl implements HomeManagerService{
 	}
 	
 	@Override
+	public List<JobApplication> getAllJobApplication() {
+		return jobApplicationRepository.findAll();
+	}
+	
+	@Override
 	public List<Booking> getNewBookings() {
 		return bookingRepository.findByBookingStatus("NEW BOOKING");
 	}
@@ -87,27 +128,76 @@ public class HomeManagerServiceImpl implements HomeManagerService{
 	}
 	
 	@Override
+	public List<JobApplication> getJobApplicationStatus() {
+		return jobApplicationRepository.findByJobApplicationStatus("APPROVED");
+	}
+	
+	@Override
+	public List<JobApplication> getNewJobApplication() {
+		return jobApplicationRepository.findByJobApplicationStatus("NEW JOB APPLICATION");
+	}
+	
+	@Override
 	public List<Employee> getAvailableEmployees() {
 	    return employeeRepository.findByAvailability("UNAVAILABLE");
 	}
 	
+    public String checkBookingStatus(Long employerId) {
+        Booking booking = bookingRepository.findByEmployerId(employerId);
+        if(booking != null) {
+            return booking.getBookingStatus();
+        } else {
+            return null;
+        }
+    }
+    
+    public String checkJobOfferStatus(Long employeeId) {
+    	JobOffer jobOffer = jobOfferRepository.findByEmployeeId(employeeId);
+    	if (jobOffer != null) {
+    		return jobOffer.getJobOfferStatus();
+    	} else {
+    		return null;
+    	}
+    }
+    
+
+    	
+
+    public User loginAuth(String email, String ic) {
+        Employer employer = employerRepository.getByEmail(email);
+        Employee employee = employeeRepository.getByEmail(email);
+        
+        if (employer != null) {
+            if (employer.getIc().equals(ic) && employer.getEmail().equals(email)) {
+                return new User(employer, null);
+            }
+        }
+        else if (employee != null) {
+            if (employee.getIc().equals(ic) && employee.getEmail().equals(email)) {
+                return new User(null, employee);
+            }
+        }
+        return null;
+    	}
+
+
 	
 	//login auth
-	public Employer loginAuth(String email, String ic) {
-		Employer employer = employerRepository.getByEmail(email);
-		
-		if (employer != null) {
-			if (employer.getIc().equals(ic) && employer.getEmail().equals(email)) {
-				return employer;
-			}	
-			else {
-				return null;
-			}
-		}
-		else {
-			return null;
-		}
-	}
+//	public Employer loginAuth(String email, String ic) {
+//		Employer employer = employerRepository.getByEmail(email);
+//		
+//		if (employer != null) {
+//			if (employer.getIc().equals(ic) && employer.getEmail().equals(email)) {
+//				return employer;
+//			}	
+//			else {
+//				return null;
+//			}
+//		}
+//		else {
+//			return null;
+//		}
+//	}
 
 
 
