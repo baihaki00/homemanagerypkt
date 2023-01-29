@@ -112,9 +112,7 @@ public class HomeManagerController {
 		String checkJobOfferStatus = homeManagerService.checkJobOfferStatus(id);
 		model.addAttribute("checkJobOfferStatus",checkJobOfferStatus);
 
-		
-	
-		
+
 		model.addAttribute("employee",employee);
 		model.addAttribute("checkJobOffer",checkJobOffer);
 		JobOffer jobOffer = homeManagerService.getJobOfferByEmployerId(id);
