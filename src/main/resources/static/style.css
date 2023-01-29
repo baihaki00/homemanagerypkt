@@ -59,7 +59,7 @@ body, h2
 
 .box-form-content {
 	
-    width: 600px;
+    width: 700px;
     height: 550px;
     display: flex;
     padding: 20px;
@@ -81,7 +81,7 @@ body, h2
 }
 .box-form-content-employee {
     width: 1100px;
-    height: 820px;
+    height: 840px;
     display: flex;
   	padding: 40px;
     align-items: center;

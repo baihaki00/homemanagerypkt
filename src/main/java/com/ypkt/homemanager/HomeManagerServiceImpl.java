@@ -142,6 +142,10 @@ public class HomeManagerServiceImpl implements HomeManagerService{
 	    return employeeRepository.findByAvailability("UNAVAILABLE");
 	}
 	
+
+	
+
+	@Override
     public String checkBookingStatus(Long employerId) {
         Booking booking = bookingRepository.findByEmployerId(employerId);
         if(booking != null) {
@@ -150,8 +154,19 @@ public class HomeManagerServiceImpl implements HomeManagerService{
             return null;
         }
     }
+	
+	@Override
+	public String checkJobOfferStatus(Long jobOffer_id) {
+	    JobOffer jobOffer = jobOfferRepository.findById(jobOffer_id).orElse(null);
+	    if (jobOffer != null) {
+	        return jobOffer.getJobOfferStatus();
+	    } else {
+	        return null;
+	    }
+	}
     
-    public String checkJobOfferStatus(Long employeeId) {
+	@Override
+    public String checkJobOffer(Long employeeId) {
     	JobOffer jobOffer = jobOfferRepository.findByEmployeeId(employeeId);
     	if (jobOffer != null) {
     		return jobOffer.getJobOfferStatus();
@@ -159,10 +174,16 @@ public class HomeManagerServiceImpl implements HomeManagerService{
     		return null;
     	}
     }
+	
+    
+
+    
+    
+    
     
 
     	
-
+    @Override
     public User loginAuth(String email, String ic) {
         Employer employer = employerRepository.getByEmail(email);
         Employee employee = employeeRepository.getByEmail(email);
@@ -179,6 +200,9 @@ public class HomeManagerServiceImpl implements HomeManagerService{
         }
         return null;
     	}
+
+
+
 
 
 	

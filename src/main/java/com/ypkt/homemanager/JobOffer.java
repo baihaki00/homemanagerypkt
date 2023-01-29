@@ -27,8 +27,8 @@ public class JobOffer {
 	@JoinColumn(name="employer_id")
 	private Employer employer;
 	
-	@Column(name="JobOfferStatus", nullable = false)
-	private String JobOfferStatus = "NEW JOB OFFER";
+	@Column(name="jobOfferStatus", nullable = false)
+	private String jobOfferStatus = "NEW JOB OFFER";
 
 	public Long getJobOffer_id() {
 		return jobOffer_id;
@@ -39,7 +39,7 @@ public class JobOffer {
 		super();
 		this.employee = employee;
 		this.employer = employer;
-		JobOfferStatus = jobOfferStatus;
+		this.jobOfferStatus = jobOfferStatus;
 	}
 	
 	public Employer getEmployer() {
@@ -66,12 +66,14 @@ public class JobOffer {
 	}
 
 	public String getJobOfferStatus() {
-		return JobOfferStatus;
+		return jobOfferStatus;
 	}
 
 	public void setJobOfferStatus(String jobOfferStatus) {
-		JobOfferStatus = jobOfferStatus;
+		this.jobOfferStatus = jobOfferStatus;
 	}
+
+
 	
 	
 	

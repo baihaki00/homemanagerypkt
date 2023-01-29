@@ -106,7 +106,15 @@ public class HomeManagerController {
 	@GetMapping("/employee/{id}")
 	public String employeePage(@PathVariable("id") Long id, Model model) {
 		Employee employee = homeManagerService.getEmployeeById(id);
-		String checkJobOffer = homeManagerService.checkJobOfferStatus(id);
+		String checkJobOffer = homeManagerService.checkJobOffer(id);
+		
+		
+		String checkJobOfferStatus = homeManagerService.checkJobOfferStatus(id);
+		model.addAttribute("checkJobOfferStatus",checkJobOfferStatus);
+
+		
+	
+		
 		model.addAttribute("employee",employee);
 		model.addAttribute("checkJobOffer",checkJobOffer);
 		JobOffer jobOffer = homeManagerService.getJobOfferByEmployerId(id);
@@ -114,8 +122,8 @@ public class HomeManagerController {
 		return("employeepage");
 	}
 	
-	@PostMapping("/employee/jobApproval/{jobOffer_id}") //when employee click accept job come here
-    public String jobApproval(@PathVariable("jobOffer_id") Long jobOffer_id) {
+	@PostMapping("/employee/jobApprove/{jobOffer_id}") //when employee click accept job come here
+    public String jobApprove(@PathVariable("jobOffer_id") Long jobOffer_id) {
 		
 		JobOffer jobOffer = homeManagerService.getJobOfferById(jobOffer_id);
         jobOffer.setJobOfferStatus("APPROVED");
@@ -123,6 +131,15 @@ public class HomeManagerController {
         return "redirect:/employee/"+jobOffer.getEmployee().getId();
     }
 	
+	@PostMapping("/employee/jobReject/{jobOffer_id}") //when employee click accept job come here
+    public String jobReject(@PathVariable("jobOffer_id") Long jobOffer_id) {
+		
+		JobOffer jobOffer = homeManagerService.getJobOfferById(jobOffer_id);
+        jobOffer.setJobOfferStatus("REJECTED");
+        homeManagerService.saveJobOffer(jobOffer);
+        return "redirect:/employee/"+jobOffer.getEmployee().getId();
+    }
+	 
 
 	
 

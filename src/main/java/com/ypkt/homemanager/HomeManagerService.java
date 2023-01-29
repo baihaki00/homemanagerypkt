@@ -43,8 +43,17 @@ public interface HomeManagerService {
 	//check booking status
 	String checkBookingStatus(Long id);
 	
+	//check job offer is present or not
+	String checkJobOffer(Long id);
+	
 	//check job offer status
 	String checkJobOfferStatus(Long id);
+	
+	
+	
+	
+	//check current job offer either approved or rejected
+//	String checkJobOfferStatus(String JobOfferStatus);
 	
 	// list
 	List<Employer> getAllEmployers();
@@ -56,6 +65,11 @@ public interface HomeManagerService {
 	List<JobApplication> getJobApplicationStatus();
 	List<JobApplication> getAllJobApplication();
 	List<JobApplication> getNewJobApplication();
+	
+
+	
+	
+
 
 
 

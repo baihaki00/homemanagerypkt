@@ -57,37 +57,39 @@
 	      <div class="card" style="width: 350px; height: 550px;">
 	        <div class="card-body">
     		<h2 class="header-pemohon">Pekerja</h2>
-			<img src="profilepic.png" class="center-image">
-		      <ul>
-		        <li>Nama : <p th:text="*{employee.name}"></p></li>
-		        <li>No. IC : 000916030761 </li>
-		        <li>Alamat : W1/447-A JALAN MERANTI PASIR MAS KEL</li>
-		        <li>No. Telefon : 01156430215</li>
-		        <li>Email : bai@com</li>
-		        <li>Pekerjaan : Pelajar</li>
-		        <li>Jawatan : CEO</li>
-		        <li>Pendapatan : RM4000</li>
-		      </ul>
+			<img src="/profilepic.png" class="center-image">
+      			<p>Nama: <span th:text="${employee.name}"></span></p>
+				<p>IC: <span th:text="${employee.ic}"></span></p>
+	        	<p>Email: <span th:text="${employee.email}"></span></p>
+		        <p>Alamat: <span th:text="${employee.address}"></span></p>
 	        </div>
 	      </div>
 	    </div>
 	    <div class="col-sm-8">
 	      <div class="card" style="width: 100%; height: 290px; margin-bottom: 10px;">
 	        <div class="card-body">
-		      <h2 class="header-pemohon">Butiran Permohonan</h2>
+		      <h2 class="header-pemohon">Butiran Pekerjaan</h2>
 		      <br>
 		      <div>
 	      		<div>
-		   			<div th:if="${checkJobOffer != null}">
+	      		<!-- <div th:if="${checkJobOffer != null && jobOffer.jobOfferStatus == null}">
 						Anda telah ditawarkan pekerjaan. Butiran seperti berikut.
 	   					<p>Job Offer ID: <span th:text="${jobOffer.jobOffer_id}"></span></p>
-						  <form method="post" th:action="@{/employee/jobApproval/{jobOffer_id} (jobOffer_id=${jobOffer.jobOffer_id})}">
+						  <form method="post" th:action="@{/employee/jobApprove/{jobOffer_id} (jobOffer_id=${jobOffer.jobOffer_id})}">
 						    <a><input type="submit" value="Terima" /></a>
 						</form>
+						<form method="post" th:action="@{/employee/jobReject/{jobOffer_id} (jobOffer_id=${jobOffer.jobOffer_id})}">
+						    <a><input type="submit" value="Tolak" /></a>
+						</form>
+				</div>  -->
+				
+					<div th:if="${checkJobOffer != null}">
+						Test
 					</div>
 					<div th:if="${checkJobOffer == null}">
-						YA
-					</div>
+						Tiada tawaran kerja setakat ini.
+					</div> 
+		   
 					
 		      </div>
 	        </div>
@@ -98,7 +100,14 @@
 	        <div class="card-body">
 	          <h2 class="header-pemohon">Status Ketersediaan</h2>
 	          <br>
-        		<p>TIADA PEKERJA YANG DITUGASKAN UNTUK MAJIKAN BUAT MASA SEKARANG</p>
+        		<label>Kemaskini Status Anda</label>
+        		<select class="form-control">
+        			<option>Sedang Bekerja</option>
+        			<option>Sedia Bekerja</option>
+        			<option>Tidak Tersedia</option>
+        		</select>
+        		<br>
+        		<button type="submit" class="btn btn-primary">Kemaskini</button> 
 	        </div>
 	      </div>
 	    </div>

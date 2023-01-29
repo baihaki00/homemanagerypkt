@@ -57,17 +57,11 @@
 	      <div class="card" style="width: 350px; height: 550px;">
 	        <div class="card-body">
     		<h2 class="header-pemohon">Akaun Pemohon</h2>
-			<img src="profilepic.png" class="center-image">
-		      <ul>
-		        <li>Nama : <span th:text="${employer.name}"></span></li>
-		        <li>No. IC : 000916030761 </li>
-		        <li>Alamat : W1/447-A JALAN MERANTI PASIR MAS KEL</li>
-		        <li>No. Telefon : 01156430215</li>
-		        <li>Email : bai@com</li>
-		        <li>Pekerjaan : Pelajar</li>
-		        <li>Jawatan : CEO</li>
-		        <li>Pendapatan : RM4000</li>
-		      </ul>
+			<img src="/profilepic.png" class="center-image">
+		        <p>Nama: <span th:text="${employer.name}"></span></p>
+				<p>IC: <span th:text="${employer.ic}"></span></p>
+		        <p>Email: <span th:text="${employer.email}"></span></p>
+		        <p>Alamat: <span th:text="${employer.address}"></span></p>
 	        </div>
 	      </div>
 	    </div>
