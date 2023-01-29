@@ -6,10 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HomemanagerApplication implements CommandLineRunner {
+public class HomeManagerApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HomemanagerApplication.class, args);
+		SpringApplication.run(HomeManagerApplication.class, args);
 	}
 	
 
