@@ -14,7 +14,7 @@
 	<name>homemanager</name>
 	<description>Home Manager Project</description>
 	<properties>
-		
+		<start-class>com.ypkt.homemanager.HomeManagerApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,7 +62,7 @@
 		        <groupId>org.springframework.boot</groupId>
 		        <artifactId>spring-boot-maven-plugin</artifactId>
 		        <configuration>
-		            <mainClass>com.ypkt.homemanager.HomeManagerController</mainClass>
+		            <mainClass>com.ypkt.homemanager.HomeManagerApplication</mainClass>
 		        </configuration>
 		      </plugin>
 		      <plugin>
