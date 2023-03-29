@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <script src="jquery-3.6.1.min.js"></script>
+    <title>HM / Admin Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link th:href="@{/style.css}" rel="stylesheet">
+    
+  </head>
+  <body>
+  	
+    <!-- Navbar -->
+    <div class="w3-top">
+      <div class="w3-bar w3-black w3-card w3-shadow">
+        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">HM</a>
+        <a class="w3-bar-item w3-padding-large w3-center w3-display-topmiddle w3-text-grey">HOME MANAGER</a>
+      </div>
+    </div>
+    <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+    <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+      <a href="#hall" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">HALL</a>
+      <a href="#booking" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">BOOKING</a>
+      <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MORE</a>
+    </div>
+    <!-- Page content -->
+    <div class="w3-content" style="max-width:2000px; margin-top:46px">
+      <br>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 bg-dark sidebar ">
+            <h2 class="text-center mt-6">Hello, Admin!</h2>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item tablinks" id="statistics"><a href="#" id="defaultOpen" onclick="openTab(event, 'statistics-content')">Statistics</a></li>
+              <li class="list-group-item tablinks" id="assign-employee"><a href="#" onclick="openTab(event, 'assign-employee-content')">Assign Employee</a></li>
+              <li class="list-group-item tablinks" id="applications-approval"><a href="#" onclick="openTab(event, 'applications-approval-content')">Applications Approval</a></li>
+              <li class="list-group-item tablinks" id="messages-inquiries"><a href="#" onclick="openTab(event, 'messages-inquiries-content')">Messages & Inquiries</a></li>
+              <li class="list-group-item tablinks" id="employers-employees-list"><a href="#" onclick="openTab(event, 'employers-employees-list-content')">Employers & Employers List</a></li>
+            </ul>
+          </div>
+          <br>
+          <div class="col-md-9 mt-6">
+            <div class="tabcontent" id="statistics-content">
+              <!-- Statistic content here -->
+              <div class="statistic-content">
+				  <div class="row">
+				    <div class="col-sm-4">
+				      <div class="card">
+				        <div class="card-body">
+				          <h5 class="card-title"><i class="fas fa-user"></i> Available Employee</h5>
+				          
+				          <p class="card-text"><span class="h2 font-weight-bold mb-0">23</span></p>
+				          <a href="#" class="btn btn-primary">View More</a>
+				        </div>
+				      </div>
+				    </div>
+				    <div class="col-sm-4">
+				      <div class="card">
+				        <div class="card-body">
+				          <h5 class="card-title"><i class="fas fa-user"></i> Total Employee</h5>
+				          <p class="card-text"><span class="h2 font-weight-bold mb-0">140</span></p>
+				          <a href="#" class="btn btn-primary">View More</a>
+				        </div>
+				      </div>
+				    </div>
+				    <div class="col-sm-4">
+				      <div class="card">
+				        <div class="card-body">
+				          <h5 class="card-title"><i class="fas fa-user"></i> Total Employers</h5>
+				          <p class="card-text"><span class="h2 font-weight-bold mb-0">129</span></p>
+				          <a href="#" class="btn btn-primary">View More</a>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+            </div>
+            <div class="tabcontent" id="assign-employee-content">
+              <!-- Assign Employee content here -->
+              <!-- Button trigger modal -->
+				<!-- Button trigger modal -->
+				
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLongTitle">Assign Employee</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <form th:action="@{/assign-employee}" method="POST" >
+						    <input type="hidden" id="booking_id" name="booking_id" th:value="${booking_id}">
+						    <input type="hidden" id="employer_id" name="employer_id" th:value="${employer_id}">
+						    <div class="form-group">
+						        <label for="employeeSelect">Select Employee:</label>
+						        <select class="form-control" id="employee.id" name="employee.id">
+						            <option th:each="employee : ${availableEmployees}" th:value="${employee.id}" th:text="${employee.name}"></option>
+						        </select>
+						    </div>
+						
+						    <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						        <button type="submit" class="btn btn-primary">Save Changes</button>
+						    </div>
+						</form>
+				      </div>
+				      
+				      
+				    </div>
+				  </div>
+				</div>
+				  <script>
+				  $('#exampleModalCenter').on('show.bs.modal', function (event) {
+					  var button = $(event.relatedTarget) // Button that triggered the modal
+					  var booking_id = button.data('booking-id') // Extract info from data-* attributes
+					
+					  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+					  var modal = $(this)
+					  modal.find('.modal-title').text('Assign Employee ' + booking_id)
+					  modal.find('.modal-body input').val(booking_id)
+					})
+				  </script>
+				  
+				  <div class="table-responsive px-2">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">COMPANY<span>ID</span></th>
+                            <th scope="col">COMPANY</th>
+                            <th scope="col">MID</th>
+                            <th scope="col">BANK<span class="ps-1">NAME</span></th>
+                            <th scope="col">CUR</th>
+                            <th class="text-center" scope="col">3DS</th>
+                            <th class="text-center" scope="col">ACTIVE</th>
+                            <th class="text-center" scope="col">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="bg-blight">235</span></td>
+                            <td><span class="bg-bdark">ABC<span class="ps-1">LOANS</span></span></td>
+                            <td><span class="bg-blight">1343</span></td>
+                            <td><span class="bg-bdark">Faster<span>Trading</span></span></td>
+                            <td><span class="bg-bdark">GBP</span></td>
+                            <td class="text-center px-0"><span class="fas fa-check"></span></td>
+                            <td class="text-center"><span class="fas fa-check"></span></td>
+                            <td class="text-center"><span class="fas fa-ellipsis-h"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bg-blight">236</span></td>
+                            <td><span class="bg-bdark">BCE<span class="ps-1">LOANS</span></span></td>
+                            <td><span class="bg-blight">1298</span></td>
+                            <td><span class="bg-bdark">Secure<span>Trading</span></span></td>
+                            <td><span class="bg-bdark">GBP</span></td>
+                            <td class="text-center px-0"><span class="fas fa-check"></span></td>
+                            <td class="text-center"><span class="fas fa-check"></span></td>
+                            <td class="text-center"><span class="fas fa-ellipsis-h"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bg-blight">237</span></td>
+                            <td><span class="bg-bdark">CDE<span class="ps-1">LOANS</span></span></td>
+                            <td><span class="bg-blight">1313</span></td>
+                            <td><span class="bg-bdark">Secure<span>Trading</span></span></td>
+                            <td><span class="bg-bdark">GBP</span></td>
+                            <td class="text-center px-0"><span class="fas fa-times"></span></td>
+                            <td class="text-center"><span class="fas fa-check"></span></td>
+                            <td class="text-center"><span class="fas fa-ellipsis-h"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bg-blight">235</span></td>
+                            <td><span class="bg-bdark">DEF<span class="ps-1">LOANS</span></span></td>
+                            <td><span class="bg-blight">1323</span></td>
+                            <td><span class="bg-bdark">Secure<span>Trading</span></span></td>
+                            <td><span class="bg-bdark">GBP</span></td>
+                            <td class="text-center px-0"><span class="fas fa-times"></span></td>
+                            <td class="text-center"><span class="fas fa-check"></span></td>
+                            <td class="text-center"><span class="fas fa-ellipsis-h"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bg-blight">235</span></td>
+                            <td><span class="bg-bdark">FEG<span class="ps-1">LOANS</span></span></td>
+                            <td><span class="bg-blight">1443</span></td>
+                            <td><span class="bg-bdark">Secure<span>Trading</span></span></td>
+                            <td><span class="bg-bdark">GBP</span></td>
+                            <td class="text-center px-0"><span class="fas fa-times"></span></td>
+                            <td class="text-center"><span class="fas fa-check"></span></td>
+                            <td class="text-center"><span class="fas fa-ellipsis-h"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bg-blight">237</span></td>
+                            <td><span class="bg-bdark">GFR<span class="ps-1">LOANS</span></span></td>
+                            <td><span class="bg-blight">1943</span></td>
+                            <td><span class="bg-bdark">Faster<span>Trading</span></span></td>
+                            <td><span class="bg-bdark">GBP</span></td>
+                            <td class="text-center px-0"><span class="fas fa-times"></span></td>
+                            <td class="text-center"><span class="fas fa-check"></span></td>
+                            <td class="text-center"><span class="fas fa-ellipsis-h"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bg-blight">235</span></td>
+                            <td><span class="bg-bdark">ABC<span class="ps-1">LOANS</span></span></td>
+                            <td><span class="bg-blight">1343</span></td>
+                            <td><span class="bg-bdark">Faster<span>Trading</span></span></td>
+                            <td><span class="bg-bdark">GBP</span></td>
+                            <td class="text-center px-0"><span class="fas fa-times"></span></td>
+                            <td class="text-center"><span class="fas fa-check"></span></td>
+                            <td class="text-center"><span class="fas fa-ellipsis-h"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+              <div class="card">
+              
+				  <div class="card-header d-flex align-items-center">
+				    <h5 class="text-center m-0">New Bookings</h5>
+				  </div>
+				  <div class="card-body overflow-auto" style="max-height:400px;">
+				    <table class="table table-striped table-hover">
+				      <thead class="thead-light">
+				        <tr>
+				          <th>Employer</th>
+				          <th>Package</th>
+				          <th>Job Scope</th>
+				          <th>Employee Assigned</th>
+				          <th>Actions</th>
+				        </tr>
+				      </thead>
+				      <tbody>
+				        <tr th:each="booking:${booking}">
+				          <td th:text="${booking.employer.name}"></td>
+				          <td th:text="${booking.packages}"></td>
+				          <td th:text="${booking.jobscope}"></td>
+				          <td th:text="${booking.employeeAssigned}"></td>
+				          <td>
+				            <a type="button" class="btn btn-primary" th:data-booking-id="${booking.booking_id}" data-toggle="modal" data-target="#exampleModalCenter">Assign</a>
+				          </td>
+				        </tr>
+				      </tbody>
+				    </table>
+				  </div>
+				</div>
+
+	              <div class="card tab-content" id="employers-tab-content">
+	                <div class="card-header">
+	                  <h5 class="text-center">Booking Status</h5>
+	                </div>
+	                <div class="card-body overflow-auto" style="max-height:400px;">
+	                  <table class="table table-striped ">
+	                    <thead>
+	                      <tr>
+	                        <th>Booking ID</th>
+	                        <th>Employer</th>
+	                        <th>Employee Assigned</th>
+	                        <th>Status</th>
+	                      </tr>
+	                    </thead>
+	                    <tbody>
+	                      <tr th:each="booking:${bookingStatus}">
+	                        <td th:text="${booking.booking_id}"></td>
+	                        <td th:text="${booking.booking_id}"></td>
+	                        <td th:text="${booking.employeeAssigned}"></td>
+	                        <td th:text="${booking.bookingStatus}"></td>
+	                        <td>
+	                          <a type="button" class="btn btn-primary" th:data-booking-id="${booking.booking_id}" data-toggle="modal" data-target="#exampleModalCenter">View</a>
+
+	                        </td>
+	                      </tr>
+	                    </tbody>
+	                  </table>
+	                </div>
+	              </div>
+            </div>
+            <div class="tabcontent" id="applications-approval-content">
+            <div class="card-header">
+               <h5 class="text-center">Job Application List</h5>
+             </div>
+             <div class="card-body overflow-auto" style="max-height:400px;">
+               <table class="table table-striped">
+                 <thead>
+                   <tr>
+                     <th>Name</th>
+                     <th>Age</th>
+                     <th>IC</th>
+                     <th>Phone Number</th>
+                     <th>Availability</th>
+                     <th>Actions</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr th:each="jobApplication:${newJobApplication}">
+                     <td th:text="${jobApplication.jobApplication_id}"></td>
+                     <td th:text="${jobApplication.name}"></td>
+                     <td th:text="${jobApplication.ic}"></td>
+                     <td th:text="${jobApplication.phonenum}"></td>
+                     <td th:text="${jobApplication.ic}"></td>
+                     <td>
+                       <form th:action="@{/registeremployee}" method="post">
+						    <input type="hidden" name="jobApplicationId" th:value="${jobApplication.jobApplication_id}">
+						    <button type="submit" class="btn btn-primary">Approve</button>
+						</form>
+                       <button class="btn btn-danger">Reject</button>
+                     </td>
+                   </tr>
+                 </tbody>
+               </table>
+             </div>
+             
+            </div>
+            <div class="tabcontent" id="messages-inquiries-content">
+              <!-- Messages & Inquiries content here -->Messages & Inquiries
+            </div>
+            <div class="tabcontent" id="employers-employees-list-content">
+              <!-- Employers & Employers List content here -->
+	              <div class="card tab-content" id="employers-tab-content">
+	                <div class="card-header">
+	                  <h5 class="text-center">Employers</h5>
+	                </div>
+	                <div class="card-body overflow-auto" style="max-height:400px;">
+	                  <table class="table table-striped ">
+	                    <thead>
+	                      <tr>
+	                        <th>Name</th>
+	                        <th>Email</th>
+	                        <th>IC</th>
+	                        <th>Phone Number</th>
+	                        <th>Actions</th>
+	                      </tr>
+	                    </thead>
+	                    <tbody>
+	                      <tr th:each="employers:${employers}">
+	                        <td th:text="${employers.name}"></td>
+	                        <td th:text="${employers.email}"></td>
+	                        <td th:text="${employers.ic}"></td>
+	                        <td th:text="${employers.phonenum}"></td>
+	                        <td>
+	                          <a class="btn btn-primary">Update</a>
+	                          <a class="btn btn-danger">Delete</a>
+	                        </td>
+	                      </tr>
+	                    </tbody>
+	                  </table>
+	                </div>
+	              </div>
+	              <div class="card mt-3 tab-content" id="employees-tab-content">
+	                <div class="card-header">
+	                  <h5 class="text-center">Employees</h5>
+	                </div>
+	                <div class="card-body overflow-auto" style="max-height:400px;">
+	                  <table class="table table-striped">
+	                    <thead>
+	                      <tr>
+	                        <th>Name</th>
+	                        <th>Age</th>
+	                        <th>IC</th>
+	                        <th>Phone Number</th>
+	                        <th>Availability</th>
+	                        <th>Actions</th>
+	                      </tr>
+	                    </thead>
+	                    <tbody>
+	                      <tr th:each="employees:${employees}">
+	                        <td th:text="${employees.name}"></td>
+	                        <td th:text="${employees.age}"></td>
+	                        <td th:text="${employees.ic}"></td>
+	                        <td th:text="${employees.phonenum}"></td>
+	                        <td th:text="${employees.availability}"></td>
+	                        <td>
+	                          <a class="btn btn-primary">Update</a>
+	                          <a class="btn btn-danger">Delete</a>
+	                        </td>
+	                      </tr>
+	                    </tbody>
+	                  </table>
+	                </div>
+	              </div>
+            </div>
+            <!-- end -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Page Content -->
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+      <i class="fa fa-facebook-official w3-hover-opacity"></i>
+      <i class="fa fa-instagram w3-hover-opacity"></i>
+      <i class="fa fa-snapchat w3-hover-opacity"></i>
+      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+      <i class="fa fa-twitter w3-hover-opacity"></i>
+      <i class="fa fa-linkedin w3-hover-opacity"></i>
+      <p class="w3-medium">Dibangunkan oleh <a href="#" target="_blank">Yayasan Pembangunan Keluarga Terrengganu</a></p>
+    </footer>
+<script>
+
+
+
+//statistic tab is default when the page loads
+	document.getElementById("defaultOpen").click();
+ //tab function
+ function openTab(evt, cityName) {
+   var i, tabcontent, tablinks;
+   tabcontent = document.getElementsByClassName("tabcontent");
+   for (i = 0; i < tabcontent.length; i++) {
+     tabcontent[i].style.display = "none";
+   }
+   tablinks = document.getElementsByClassName("tablinks");
+   for (i = 0; i < tablinks.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" active", "");
+   }
+   document.getElementById(cityName).style.display = "block";
+   evt.currentTarget.className += " active";
+ }
+ 
+ // Automatic Slideshow - change image every 4 seconds
+ var myIndex = 0;
+ carousel();
+ 
+ function carousel() {
+   var i;
+   var x = document.getElementsByClassName("mySlides");
+   for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+   }
+   myIndex++;
+   if (myIndex > x.length) {myIndex = 1}    
+   x[myIndex-1].style.display = "block";  
+   setTimeout(carousel, 4000);    
+ }
+ 
+ // Used to toggle the menu on small screens when clicking on the menu button
+ function myFunction() {
+   var x = document.getElementById("navDemo");
+   if (x.className.indexOf("w3-show") == -1) {
+     x.className += " w3-show";
+   } else { 
+     x.className = x.className.replace(" w3-show", "");
+   }
+ }
+ 
+ // When the user clicks anywhere outside of the modal, close it
+ var modal = document.getElementById('ticketModal');
+ window.onclick = function(event) {
+   if (event.target == modal) {
+     modal.style.display = "none";
+        }
+      }    
+    </script>
+  </body>
+</html>

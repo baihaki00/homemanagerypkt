@@ -26,11 +26,11 @@
     <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
   	<a class="w3-bar-item w3-padding-large w3-center w3-display-topmiddle w3-text-grey">HOME MANAGER</a>
   	<div th:if="${session.isEmpty()}">
-	  	<a th:href="@{/registers/new}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Daftar</a>
+	  	<a th:href="@{/register/choose}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Daftar</a>
 	  	<a th:href="@{/login}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Masuk</a>	
   	</div>
   	<div th:if="!${session.isEmpty()}">
-  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Buat Temujanji</a>
+  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Keluar</a>
   		<a th:text="'Hello, '+ ${session.name}" th:href="@{/account/{id} (id=${session.id})}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"></a>
   	</div>
   </div>
@@ -53,13 +53,28 @@
   	
     <div class="box-form-content">
         <div class="container">
-  <h3 class="text-center mb-5">PENDAFTARAN</h3>
+        
+        <div class="text-center">
+    		<img src="/logoypkt.png" alt="logoypkt"  style="margin-bottom: 30px; width:65px; height:auto">
+   		</div>
+  <h3 style="text-align: center;margin-bottom: 30px;" class="w3-wide">PENDAFTARAN</h3>
   <div class="row">
-    <div class="col-md-6 text-right">
-      <a href="/register/employer/new" class="btn btn-primary btn-lg">DAFTAR SEBAGAI MAJIKAN</a>
+    <div class="col-md-6">
+    	<div class="card float-right" style="width: 14rem;">
+    	<div style="width:50%" class="center-image"><img class="card-img-top" src="/employer.png"></div>
+		  <div class="card-body">
+		  <a href="/register/employer/new" class="btn btn-dark">DAFTAR SEBAGAI MAJIKAN</a>
+		  </div>
+		</div>
     </div>
-    <div class="col-md-6 text-left">
-      <a href="/register/employee/new" class="btn btn-secondary btn-lg">DAFTAR SEBAGAI PEKERJA</a>
+    <div class="col-md-6">
+    	
+    	<div class="card" style="width: 14rem;">
+		  <div style="width:50%" class="center-image"><img class="card-img-top" src="/employee.png"></div>
+		  <div class="card-body">
+		  <a href="/register/employee/new" class="btn btn-dark">DAFTAR SEBAGAI PEKERJA</a>
+		  </div>
+		</div>
     </div>
   </div>
 </div>

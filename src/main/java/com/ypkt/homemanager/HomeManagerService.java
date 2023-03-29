@@ -49,7 +49,11 @@ public interface HomeManagerService {
 	//check job offer status
 	String checkJobOfferStatus(Long id);
 	
+	//find employee id by job_offer
+	JobOffer getJobOfferByEmployeeId(Long id);
 	
+	//find booking by employer_id
+	Booking getBookingByEmployerId(JobOffer jobOffer);
 	
 	
 	//check current job offer either approved or rejected
@@ -65,6 +69,17 @@ public interface HomeManagerService {
 	List<JobApplication> getJobApplicationStatus();
 	List<JobApplication> getAllJobApplication();
 	List<JobApplication> getNewJobApplication();
+	void deleteEmployeeById(Long id);
+	void deleteEmployerById(Long id);
+	void deleteJobOfferByEmployeeId(Long id);
+	void deleteBookingByEmployerId(Long id);
+	void deleteJobApplicationById(Long id);
+	Booking getBookingByEmployerId(Long id);
+	Booking getBookingByEmployer(Employer employer);
+
+
+
+
 	
 
 	

@@ -56,19 +56,35 @@
 	    <div class="col-sm-4">
 	      <div class="card" style="width: 350px; height: 550px;">
 	        <div class="card-body">
-    		<h2 class="header-pemohon">Pekerja</h2>
-			<img src="/profilepic.png" class="center-image">
-      			<p>Nama: <span th:text="${employee.name}"></span></p>
-				<p>IC: <span th:text="${employee.ic}"></span></p>
-	        	<p>Email: <span th:text="${employee.email}"></span></p>
-		        <p>Alamat: <span th:text="${employee.address}"></span></p>
+    		<h3 style="text-align: center;margin-bottom: 10px;" class="w3-wide">PEKERJA</h3>
+			<img src="/profilepic.png" class="center-image" style="width:30%">
+				<br>
+				<h5>Maklumat Peribadi</h5>
+                <hr class="mt-0 mb-2">
+                
+                <div class="col-8 mb-2">
+                    <h6>Nama</h6>
+                    <p class="text-muted"><span th:text="${employee.name}"></span></p>
+                </div>
+                <div class="col-8 mb-2">
+                    <h6>Email</h6>
+                    <p class="text-muted"><span th:text="${employee.email}"></span></p>
+                </div>
+                <div class="col-8 mb-2">
+                    <h6>No IC</h6>
+                    <p class="text-muted"><span th:text="${employee.ic}"></span></p>
+                </div>
+                <div class="col-10 mb-2">
+                    <h6>Alamat</h6>
+                    <p class="text-muted"><span th:text="${employee.address}"></span></p>
+                </div>
 	        </div>
 	      </div>
 	    </div>
 	    <div class="col-sm-8">
 	      <div class="card" style="width: 100%; height: 290px; margin-bottom: 10px;">
 	        <div class="card-body">
-		      <h2 class="header-pemohon">Butiran Pekerjaan</h2>
+		      <h3 style="text-align: center;margin-bottom: 10px;" class="w3-wide">BUTIRAN PEKERJAAN</h3>
 		      <br>
 		      <div>
 	      		<div>
@@ -82,15 +98,21 @@
 						    <a><input type="submit" value="Tolak" /></a>
 						</form>
 				</div>  -->
-				
-					<div th:if="${checkJobOffer != null}">
-						Test
+					<p>Status Tawaran Kerja: <span th:text="${jobOffer.jobOfferStatus}">></span></p>
+					<div th:if="${checkJobOffer != null && jobOffer.jobOfferStatus == null}">
+						
 					</div>
-					<div th:if="${checkJobOffer == null}">
+					<div th:if="${checkJobOffer == null}" class="text-center">
 						Tiada tawaran kerja setakat ini.
 					</div> 
-		   
-					
+					<div th:if="${jobOffer.jobOfferStatus == 'NEW JOB OFFER' && checkJobOffer != null}" class="text-center">
+						
+						Anda telah ditawarkan pekerjaan. Butiran seperti berikut.
+	   					<p>Job Offer ID: <span th:text="${jobOffer.jobOffer_id}"></span></p>
+						  <form method="post" th:action="@{/employee/jobApprove/{jobOffer_id} (jobOffer_id=${jobOffer.jobOffer_id})}">
+						    <a><input type="submit" value="Terima" /></a>
+						</form>
+					</div>
 		      </div>
 	        </div>
 	      	</div>
@@ -98,16 +120,18 @@
 	      
 	      <div class="card" style="width: 100%; height: 250px; margin-top: 10px;">
 	        <div class="card-body">
-	          <h2 class="header-pemohon">Status Ketersediaan</h2>
+	          <h3 style="text-align: center;margin-bottom: 10px;" class="w3-wide">STATUS PEKERJA</h3>
 	          <br>
         		<label>Kemaskini Status Anda</label>
         		<select class="form-control">
         			<option>Sedang Bekerja</option>
         			<option>Sedia Bekerja</option>
-        			<option>Tidak Tersedia</option>
+        			<option>Tidak Bekerja</option>
         		</select>
         		<br>
-        		<button type="submit" class="btn btn-primary">Kemaskini</button> 
+        		<div class="text-center">
+           <button type="submit" class="btn btn-dark">Kemaskini</button>
+        </div>
 	        </div>
 	      </div>
 	    </div>

@@ -28,11 +28,11 @@
     <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
   	<a class="w3-bar-item w3-padding-large w3-center w3-display-topmiddle w3-text-grey">HOME MANAGER</a>
   	<div th:if="${session.isEmpty()}">
-	  	<a th:href="@{/registers/new}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Daftar</a>
+	  	<a th:href="@{/register/choose}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Daftar</a>
 	  	<a th:href="@{/login}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Masuk</a>	
   	</div>
   	<div th:if="!${session.isEmpty()}">
-  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Buat Temujanji</a>
+  		<a th:href="@{/logout}"  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Log Keluar</a>
   		<a th:text="'Hello, '+ ${session.name}" th:href="@{/account/{id} (id=${session.id})}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"></a>
   	</div>
   </div>
@@ -56,16 +56,16 @@
       
       <form class="register-form" th:action="@{/registeremployer}" th:object = ${register} method="POST">
         <h3 style="text-align: center;margin-bottom:20px">Daftar Akaun Sebagai Majikan</h3>
-        <input class="w3-input w3-border register-input" type="text" placeholder="Nama Pemohon" required name="name" th:field="*{name}">
-        <input class="w3-input w3-border register-input" type="text" placeholder="No. Kad Pengenalan" required name="ic" th:field="*{ic}">
-        <input class="w3-input w3-border register-input" type="text" placeholder="Alamat" required name="alamat" th:field="*{address}">
-        <input class="w3-input w3-border register-input" type="text" placeholder="No. Telefon" required name="telefon" th:field="*{phonenum}">
-        <input class="w3-input w3-border register-input" type="text" placeholder="Email" required name="email" th:field="*{email}">
-        <input class="w3-input w3-border register-input" type="text" placeholder="Pekerjaan" required name="pekerjaan" th:field="*{job}">
-        <input class="w3-input w3-border register-input" type="text" placeholder="Jawatan" required name="jawatan" th:field="*{position}">
-        <input class="w3-input w3-border register-input" type="text" placeholder="Pendapatan" required name="pendapatan" th:field="*{salary}">
+        <input class="form-control register-input"  type="text" placeholder="Nama Pemohon" required name="name" th:field="*{name}">
+        <input class="form-control register-input"  type="text" placeholder="No. Kad Pengenalan" required name="ic" th:field="*{ic}">
+        <input class="form-control register-input"  type="text" placeholder="Alamat" required name="alamat" th:field="*{address}">
+        <input class="form-control register-input"  type="text" placeholder="No. Telefon" required name="telefon" th:field="*{phonenum}">
+        <input class="form-control register-input"  type="text" placeholder="Email" required name="email" th:field="*{email}">
+        <input class="form-control register-input"  type="text" placeholder="Pekerjaan" required name="pekerjaan" th:field="*{job}">
+        <input class="form-control register-input"  type="text" placeholder="Jawatan" required name="jawatan" th:field="*{position}">
+        <input class="form-control register-input"  type="text" placeholder="Pendapatan" required name="pendapatan" th:field="*{salary}">
         <div class="text-center">
-           <button type="submit" class="btn btn-primary">DAFTAR</button> 
+           <button type="submit" class="btn btn-dark">DAFTAR</button> 
         </div>
       </form>
     </div>

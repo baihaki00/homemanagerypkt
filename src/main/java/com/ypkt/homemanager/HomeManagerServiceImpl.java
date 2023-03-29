@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
 
 
 @Service
+@Transactional
 public class HomeManagerServiceImpl implements HomeManagerService{
 	
 	@Autowired
@@ -96,6 +99,22 @@ public class HomeManagerServiceImpl implements HomeManagerService{
 	public JobOffer getJobOfferByEmployerId(Long id) {
 		return jobOfferRepository.findByEmployeeId(id);
 	}
+	
+	@Override
+	public JobOffer getJobOfferByEmployeeId(Long id) {
+		return jobOfferRepository.findByEmployeeId(id);
+	}
+	
+	@Override
+	public Booking getBookingByEmployerId(Long id) {
+		return bookingRepository.findByEmployerId(id);
+	}
+	
+	@Override
+	public Booking getBookingByEmployer(Employer employer) {
+		return bookingRepository.findByEmployer(employer);
+	}
+	
 
 	@Override //list employers
 	public List<Employer> getAllEmployers() {
@@ -175,7 +194,37 @@ public class HomeManagerServiceImpl implements HomeManagerService{
     	}
     }
 	
-    
+	//delete employee
+	@Override
+	public void deleteEmployeeById(Long id)
+	{
+		employeeRepository.deleteById(id);
+	}
+	
+	//delete employer
+	public void deleteEmployerById(Long id) {
+		employerRepository.deleteById(id);
+	}
+	
+	//delete job application
+	public void deleteJobApplicationById(Long id) {
+		jobApplicationRepository.deleteById(id);
+	}
+	
+	//delete job offer
+	@Override
+	public void deleteJobOfferByEmployeeId(Long id) {
+	    jobOfferRepository.deleteByEmployeeId(id);
+	}
+	
+	@Override
+	public void deleteBookingByEmployerId(Long id) {
+		bookingRepository.deleteByEmployerId(id);
+	}
+	
+
+	
+
 
     
     
@@ -200,6 +249,16 @@ public class HomeManagerServiceImpl implements HomeManagerService{
         }
         return null;
     	}
+
+	@Override
+	public Booking getBookingByEmployerId(JobOffer jobOffer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
 
 
 

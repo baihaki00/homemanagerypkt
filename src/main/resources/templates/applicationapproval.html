@@ -40,9 +40,9 @@
       <!-- Sidebar -->
       <div class="col-3 bg-dark" style="min-height: 100vh">
         <nav class="nav flex-column">
-          <a class="nav-link text-white active" href="/dashboard">Dashboard</a>
+          <a class="nav-link text-white " href="/dashboard">Dashboard</a>
           <a class="nav-link text-white" th:href="@{/assignEmployee}">Assign Employee</a>
-          <a class="nav-link text-white" th:href="@{/applicationApproval}">Application Approval</a>
+          <a class="nav-link text-white active" th:href="@{/applicationApproval}">Application Approval</a>
           <a class="nav-link text-white" th:href="@{/message}">Messages & Inquiries</a>
           <a class="nav-link text-white" th:href="@{/userList}">Employers & Employees List</a>
           <a class="nav-link text-white" th:href="@{/addUser}">Add User</a>
@@ -51,41 +51,46 @@
       <!-- Page Content -->
       <div class="col-9">
         <!-- Your content here -->
-        <br>
-        <div class="statistic-content">
-				  <div class="row">
-				    <div class="col-sm-4">
-				      <div class="card">
-				        <div class="card-body">
-				          <h5 class="card-title"><i class="fas fa-user"></i> Available Employee</h5>
-				          
-				          <p class="card-text"><span class="h2 font-weight-bold mb-0">23</span></p>
-				          <a href="#" class="btn btn-primary">View More</a>
-				        </div>
-				      </div>
-				    </div>
-				    <div class="col-sm-4">
-				      <div class="card">
-				        <div class="card-body">
-				          <h5 class="card-title"><i class="fas fa-user"></i> Total Employee</h5>
-				          <p class="card-text"><span class="h2 font-weight-bold mb-0">140</span></p>
-				          <a href="#" class="btn btn-primary">View More</a>
-				        </div>
-				      </div>
-				    </div>
-				    <div class="col-sm-4">
-				      <div class="card">
-				        <div class="card-body">
-				          <h5 class="card-title"><i class="fas fa-user"></i> Total Employers</h5>
-				          <p class="card-text"><span class="h2 font-weight-bold mb-0">129</span></p>
-				          <a href="#" class="btn btn-primary">View More</a>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
+        		<br>
+        		<h2 class="w3-wide text-center">JOB APPLICATION LIST</h2>
+    			<div class="col-12 text-center" style="height:200px;border-radius:10px">
+		      <div class="table-responsive">
+				  <table class="table table-hover table-borderless table-sm table-secondary border-dark">
+				    <thead>
+				      <tr>
+				        <th>ID</th>
+	                     <th>Name</th>
+	                     <th>IC</th>
+	                     <th>Job Scopes</th>
+	                     <th>Age</th>
+	                     <th>Address</th>
+	                     <th>Actions</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				      <tbody>
+				        <tr th:each="jobApplication:${newJobApplication}">
+	                     <td th:text="${jobApplication.jobApplication_id}"></td>
+	                     <td th:text="${jobApplication.name}"></td>
+	                     <td th:text="${jobApplication.ic}"></td>
+	                     <td th:text="${jobApplication.jobscope}"></td>
+	                     <td th:text="${jobApplication.age}"></td>
+	                     <td th:text="${jobApplication.address}"></td>
+	                     <td>
+	                       <form th:action="@{/registeremployee}" method="post">
+							    <input type="hidden" name="jobApplicationId" th:value="${jobApplication.jobApplication_id}">
+							    <button type="submit" class="btn btn-primary">Approve</button>
+							</form>
+	                       <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this job application?');" th:href="@{/jobApplication/delete/{id} (id=${jobApplication.jobApplication_id})}">Reject</a>
+	                     </td>
+	                   </tr>
+				      </tbody>
+				    </tbody>
+				  </table>
 				</div>
-      </div>
+		</div>
     </div>
+  </div>
   </div>
 </body>
 

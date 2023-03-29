@@ -32,6 +32,54 @@ public class HomeManagerController {
 		return "registerchoose";
 	}
 	
+	@GetMapping("/assignEmployee")
+	public String assignEmployeePage(Model model) {
+		model.addAttribute("employers",homeManagerService.getAllEmployers());
+		model.addAttribute("employees",homeManagerService.getAllEmployees());
+		model.addAttribute("booking",homeManagerService.getNewBookings());
+		model.addAttribute("bookingAll",homeManagerService.getAllBookings());
+		model.addAttribute("bookingStatus",homeManagerService.getBookingStatus());
+		model.addAttribute("availableEmployees",homeManagerService.getAvailableEmployees());
+		model.addAttribute("jobApplication",homeManagerService.getAllJobApplication());
+		model.addAttribute("newJobApplication",homeManagerService.getNewJobApplication());
+		return "assignemployee";
+	}
+	
+	@GetMapping("/applicationApproval")
+	public String applicationApprovalPage(Model model) {
+		model.addAttribute("employers",homeManagerService.getAllEmployers());
+		model.addAttribute("employees",homeManagerService.getAllEmployees());
+		model.addAttribute("booking",homeManagerService.getNewBookings());
+		model.addAttribute("bookingStatus",homeManagerService.getBookingStatus());
+		model.addAttribute("availableEmployees",homeManagerService.getAvailableEmployees());
+		model.addAttribute("jobApplication",homeManagerService.getAllJobApplication());
+		model.addAttribute("newJobApplication",homeManagerService.getNewJobApplication());
+		return "applicationapproval";
+	}
+	
+	@GetMapping("/message")
+	public String messagePage(Model model) {
+		return "message";
+	}
+	
+	@GetMapping("/userList")
+	public String userListPage(Model model) {
+		model.addAttribute("employers",homeManagerService.getAllEmployers());
+		model.addAttribute("employees",homeManagerService.getAllEmployees());
+		return "userlist";
+	}
+	
+	@GetMapping("/addUser")
+	public String userAddUserPage(Model model) {
+		return "adduser";
+	}
+	
+	@GetMapping("/dashboard")
+	public String dashBoardPage(Model model) {
+		return "adminpage";
+	}
+	
+	
 //-------------------------------EMPLOYER----------------------------------------//
 	@GetMapping("/register/employer/new") //register page //create obj
 	public String registerPageEmployer(Model model) {
@@ -54,6 +102,42 @@ public class HomeManagerController {
 		model.addAttribute("employer",employer);
 		return("employerpage");
 	}
+	
+	@GetMapping("/employer/delete/{id}")
+	public String deleteEmployer(@PathVariable Long id) {
+		
+		//check booking_id references by employerId is null or not
+		Booking booking = homeManagerService.getBookingByEmployerId(id);
+		
+		if (booking != null) {
+			homeManagerService.deleteBookingByEmployerId(id);
+			homeManagerService.deleteEmployerById(id);
+			return "redirect:/userList";
+		}
+		else {
+			homeManagerService.deleteEmployerById(id);
+			return "redirect:/userList";
+		}
+	}
+	
+
+	
+//	@GetMapping("/employee/delete/{id}")
+//	public String deleteEmployee(@PathVariable Long id) {
+//		
+//		JobOffer jobOffer = homeManagerService.getJobOfferByEmployeeId(id);
+//		
+//		//check if joboffer_id references by employeeid is null or not
+//		if (jobOffer != null) {
+//			homeManagerService.deleteJobOfferByEmployeeId(id);
+//			homeManagerService.deleteEmployeeById(id);
+//			return "redirect:/userList";
+//		}
+//		else {
+//			return null;
+//		}
+//
+//	}
 	
 	
 //-------------------------------EMPLOYEE----------------------------------------//
@@ -80,6 +164,14 @@ public class HomeManagerController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/jobApplication/delete/{id}")
+	public String deleteJobApplication(@PathVariable Long id) {
+		
+		//JobApplication jobApplication = homeManagerService.getJobApplicationById(id);
+		homeManagerService.deleteJobApplicationById(id);
+		return "redirect:/applicationApproval";
+	}
+	
 	@PostMapping("/registeremployee") //save to employee table, 3 fields will be not included which is evaluation, availability and employee_id, these set of fields will be created only after the application is approved 
 	public String saveRegister(@ModelAttribute("register")Employee employee, @RequestParam Long jobApplicationId) {
 	    JobApplication jobApplication = homeManagerService.getJobApplicationById(jobApplicationId);
@@ -100,7 +192,7 @@ public class HomeManagerController {
 	    newEmployee.setVehicle(jobApplication.getVehicle());
 	    jobApplication.setJobApplicationStatus("APPROVED");
 	    homeManagerService.saveRegister(newEmployee);
-	    return "redirect:/admin";
+	    return "redirect:/applicationApproval";
 	}
 	
 	@GetMapping("/employee/{id}")
@@ -122,9 +214,12 @@ public class HomeManagerController {
 	
 	@PostMapping("/employee/jobApprove/{jobOffer_id}") //when employee click accept job come here
     public String jobApprove(@PathVariable("jobOffer_id") Long jobOffer_id) {
-		
 		JobOffer jobOffer = homeManagerService.getJobOfferById(jobOffer_id);
+		Employer employer = jobOffer.getEmployer();
+		Booking booking = homeManagerService.getBookingByEmployer(employer);
         jobOffer.setJobOfferStatus("APPROVED");
+        booking.setBookingStatus("ACTIVE");
+        homeManagerService.saveBooking(booking);
         homeManagerService.saveJobOffer(jobOffer);
         return "redirect:/employee/"+jobOffer.getEmployee().getId();
     }
@@ -137,6 +232,26 @@ public class HomeManagerController {
         homeManagerService.saveJobOffer(jobOffer);
         return "redirect:/employee/"+jobOffer.getEmployee().getId();
     }
+	
+	@GetMapping("/employee/delete/{id}")
+	public String deleteEmployee(@PathVariable Long id) {
+		
+		JobOffer jobOffer = homeManagerService.getJobOfferByEmployeeId(id);
+		
+		//check if joboffer_id references by employeeid is null or not
+		if (jobOffer != null) {
+			homeManagerService.deleteJobOfferByEmployeeId(id);
+			homeManagerService.deleteEmployeeById(id);
+			return "redirect:/userList";
+		}
+		else {
+			homeManagerService.deleteEmployeeById(id);
+			return "redirect:/userList";
+		}
+
+	}
+	
+	
 	 
 
 	
@@ -179,7 +294,7 @@ public class HomeManagerController {
 		newJobOffer.setEmployer(existingBooking.getEmployer());
 		newJobOffer.setJobOfferStatus("NEW JOB OFFER");
 		homeManagerService.saveJobOffer(newJobOffer);
-		return "redirect:/admin";
+		return "redirect:/assignEmployee";
 	}
 
 	
@@ -198,7 +313,7 @@ public class HomeManagerController {
 		booking.setEmployer(employer);
 		booking.setBookingStatus("NEW BOOKING");
 		homeManagerService.saveBooking(booking);
-		return "redirect:/";
+		return ("redirect:/employer/" + employer.getId());
 	}
 	
 //-------------------------------LOGIN----------------------------------------//

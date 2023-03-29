@@ -10,7 +10,11 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
 	List<Booking> findByBookingStatus(String bookingStatus);
 
-	Booking findByEmployerId(Long employerId);
+	Booking findByEmployerId(Long id);
+
+	void deleteByEmployerId(Long id);
+
+	Booking findByEmployer(Employer employer);
 	
 	
 
